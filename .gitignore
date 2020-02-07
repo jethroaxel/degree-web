@@ -1,0 +1,14 @@
+.DS_Store
+### Java template
+*.class
+
+### IntelliJ Project files
+*.iml
+.idea/
+target/
+log.txt
+lib
+
+.project
+.settings
+.classpath
