@@ -2,14 +2,18 @@ package signIn;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
 import home.HomePage;
 
+@Component
+@Lazy
 public class SignInPage
 {
     private static final By USERNAME_INPUT = By.id("username");
@@ -32,23 +36,26 @@ public class SignInPage
 
     public void addEmail(String username)
     {
-
+        driver.findElement(USERNAME_INPUT).sendKeys(username);
     }
 
     public void continueToPassword()
     {
         driver.findElement(CONTINUE).click();
-
     }
 
-    public HomePage continueToSignIn(By locator)
+    public HomePage continueToSignIn(String password)
     {
-        driver.findElement(CONTINUE).click();
+        new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_INPUT))
+                .sendKeys(password);
+        Actions action = new Actions(driver);
+        action.moveToElement(driver.findElement(CONTINUE)).click().perform();
+
         return homePage;
     }
 
-    public void enterPassword(String password)
+    public void signIn(String user, String psswd)
     {
-
     }
 }

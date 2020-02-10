@@ -1,9 +1,11 @@
-public class Credentials
+package user;
+
+public class UserCredentials
 {
     private String userName;
     private String password;
 
-    public Credentials(String userName, String password)
+    public UserCredentials(String userName, String password)
     {
         this.userName = userName;
         this.password = password;

@@ -1,3 +1,5 @@
+package config;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,12 +11,13 @@ import javax.inject.Inject;
 public class WebDriverFactory
 {
     private String browser;
-    private static final String PATH_TO_CHROME_DRIVER_BINARY = "/path/to/binary";
+    private String pathToDriver;
 
     @Inject
-    public WebDriverFactory(@Value("${browser}") String browser)
+    public WebDriverFactory(@Value("${browser}") String browser, @Value("${driver}")String pathToDriver)
     {
         this.browser= browser;
+        this.pathToDriver = pathToDriver;
     }
 
     public WebDriver createWebDriver()
@@ -22,11 +25,12 @@ public class WebDriverFactory
         WebDriver webDriver;
         if(browser.equals(Browser.CHROME))
         {
-            System.setProperty("webdriver."+ browser + ".driver", PATH_TO_CHROME_DRIVER_BINARY);
+            System.out.println("Using chromedriver binary in " + pathToDriver);
+            System.setProperty("webdriver." + browser + ".driver", pathToDriver);
             webDriver = new ChromeDriver();
         }
         else {
-            throw new RuntimeException("Unknown, or unsupported browser");
+            throw new RuntimeException( browser + " is unknown, or unsupported");
         }
         return webDriver;
     }
