@@ -12,6 +12,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import profile.pathways.PathwayEditor;
+import profile.pathways.PathwayPage;
+
 @Component
 @Lazy
 public class ProfilePage
@@ -25,7 +28,7 @@ public class ProfilePage
 
     @Inject
     @Lazy
-    PathwaysModal pathwaysModal;
+    PathwayEditor.PathwaysModal pathwaysModal;
 
     @Inject
     @Lazy
@@ -46,7 +49,7 @@ public class ProfilePage
         return pathwayPage;
     }
 
-    public PathwaysModal clickOnPathways()
+    public PathwayEditor.PathwaysModal clickOnPathways()
     {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfElementLocated(CREATE_PATHWAYS)).click();

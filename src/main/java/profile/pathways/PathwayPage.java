@@ -1,4 +1,4 @@
-package profile;
+package profile.pathways;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -10,6 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import javax.inject.Inject;
 
+import profile.pathways.PathwayEditor;
+import profile.pathways.PathwayPage;
 import signIn.SignInExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -19,7 +21,7 @@ public class ProfileTest
     static String PATHWAT_NAME = "Test Pathway";
 
     ProfilePage profilePage;
-    PathwaysModal pathwaysModal;
+    PathwayEditor.PathwaysModal pathwaysModal;
     PathwayEditor pathwayEditor;
     PathwayPage pathwayPage;
 
