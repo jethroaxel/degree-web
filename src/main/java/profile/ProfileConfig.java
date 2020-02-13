@@ -9,7 +9,8 @@ import signIn.SignInExtension;
 
 @Configuration
 @Import({AppConfigurator.class, LoginImpl.class, ProfileNavigator.class,
-        SignInExtension.class, ProfilePage.class, PathwaysModal.class })
+        SignInExtension.class, ProfilePage.class, PathwaysModal.class, PathwayEditor.class,
+        PathwayPage.class })
 public class ProfileConfig
 {
 }

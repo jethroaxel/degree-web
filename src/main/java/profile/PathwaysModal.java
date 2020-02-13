@@ -25,13 +25,15 @@ public class PathwaysModal
     private WebElement save;
 
     @Inject
+    @Lazy
+    PathwayEditor pathwayEditor;
+
+    @Inject
     public PathwaysModal(WebDriver driver)
     {
         this.driver = driver;
         save = new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.visibilityOfElementLocated(SAVE_PATHWAY));
-        //assert modal is not null
-
     }
 
     private void setField(By locator, String value)
@@ -41,7 +43,7 @@ public class PathwaysModal
         e.sendKeys(value);
     }
 
-    public void fillUpForm(String name, String description, String skill)
+    public PathwayEditor fillUpForm(String name, String description, String skill)
     {
         final By LIST_OF_SKILLS_AVAILABLE = By.cssSelector("span strong");
         setField(PATHWAY_NAME, name);
@@ -59,5 +61,6 @@ public class PathwaysModal
             }
         }
         save.click();
+        return pathwayEditor;
     }
 }

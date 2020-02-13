@@ -16,30 +16,38 @@ import javax.inject.Inject;
 @Lazy
 public class ProfilePage
 {
-    private static final By PATHWAYS_TAB = By.cssSelector("a.tabnav__link.ng-binding");
+    private static final By TAB = By.cssSelector("a.tabnav__link.ng-binding");
     private static final By CREATE_PATHWAYS = By.cssSelector(".btn.btn-primary.ng-binding");
 
     private final WebDriver driver;
     private WebElement pathways;
+    List<WebElement> tabs;
 
-    @Lazy
     @Inject
+    @Lazy
     PathwaysModal pathwaysModal;
+
+    @Inject
+    @Lazy
+    PathwayPage pathwayPage;
 
     @Inject
     public ProfilePage(WebDriver webDriver)
     {
         this.driver = webDriver;
-        pathways = new WebDriverWait(webDriver, 30)
-                .until(ExpectedConditions.visibilityOfElementLocated(PATHWAYS_TAB));
+        tabs = new WebDriverWait(webDriver, 30)
+                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(TAB));
+    }
+
+    public PathwayPage goToPathwayTab()
+    {
+        tabs = driver.findElements(TAB);
+        tabs.get(3).click();
+        return pathwayPage;
     }
 
     public PathwaysModal clickOnPathways()
     {
-        pathways.click();
-        List<WebElement> tabs = driver.findElements(PATHWAYS_TAB);
-        tabs.get(3).click();
-
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfElementLocated(CREATE_PATHWAYS)).click();
         return pathwaysModal;

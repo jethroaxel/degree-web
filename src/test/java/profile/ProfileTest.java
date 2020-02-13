@@ -16,9 +16,12 @@ import signIn.SignInExtension;
 @SpringJUnitConfig(value = ProfileConfig.class)
 public class ProfileTest
 {
-    ProfilePage profilePage;
+    static String PATHWAT_NAME = "Test Pathway";
 
+    ProfilePage profilePage;
     PathwaysModal pathwaysModal;
+    PathwayEditor pathwayEditor;
+    PathwayPage pathwayPage;
 
     @Inject
     ProfileNavigator profileNavigator;
@@ -36,17 +39,16 @@ public class ProfileTest
     @Test
     public void ShouldCreatePathWay_ByAddingSkill()
     {
+        profilePage.goToPathwayTab();
         pathwaysModal = profilePage.clickOnPathways();
         Assertions.assertNotNull(pathwaysModal);
-        pathwaysModal.fillUpForm("Test Pathway", "testing purposes", "java");
 
-        weeeit();
-    }
+        pathwayEditor = pathwaysModal.fillUpForm(PATHWAT_NAME,
+                "testing purposes", "java");
+        pathwayEditor.clickDoneButton();
 
-    public void weeeit()
-    {
-        try
-        { Thread.sleep(5000);}
-        catch(InterruptedException e) { e.printStackTrace();}
+        profileNavigator.navigateToProfile();
+        pathwayPage = profilePage.goToPathwayTab();
+        Assertions.assertEquals(pathwayPage.getCard(0), PATHWAT_NAME);
     }
 }
