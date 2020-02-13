@@ -1,9 +1,14 @@
 package signIn;
 
+import org.springframework.context.annotation.Import;
+import org.springframework.stereotype.Component;
+
 import javax.inject.Inject;
 
 import user.UserCredentials;
 
+@Component
+@Import(SignInNavigator.class)
 public class LoginImpl implements Login
 {
     private final UserCredentials userCredentials;
@@ -11,6 +16,7 @@ public class LoginImpl implements Login
     @Inject
     SignInNavigator signInNavigator;
 
+    @Inject
     public LoginImpl(UserCredentials userCredentials)
     {
         this.userCredentials = userCredentials;
@@ -19,6 +25,6 @@ public class LoginImpl implements Login
     public void login()
     {
         SignInPage signInPage = signInNavigator.navigateToSignIn();
-        signInPage.signIn(userCredentials.getUserName(), userCredentials.getPassword());
+        signInPage.signIn(userCredentials);
     }
 }

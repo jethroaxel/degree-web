@@ -26,13 +26,6 @@ public class SignInTest
     @Inject
     UserCredentials userCredentials;
 
-    public void weeeit()
-    {
-        try
-        { Thread.sleep(1500);}
-        catch(InterruptedException e) { e.printStackTrace();}
-    }
-
     @BeforeEach
     public void setup()
     {
@@ -42,9 +35,7 @@ public class SignInTest
     @Test
     public void GoToSignInPage()
     {
-        signInPage.addEmail(userCredentials.getUserName());
-        signInPage.continueToPassword();
-        homePage = signInPage.continueToSignIn(userCredentials.getPassword());
+        homePage = signInPage.signIn(userCredentials);
         Assert.notNull(homePage, "Home pae should load");
     }
 }

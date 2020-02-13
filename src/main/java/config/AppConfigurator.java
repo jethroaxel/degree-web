@@ -5,14 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import user.UserCredentials;
 
 @Configuration
 @PropertySource("classpath:application.properties")
-@Import(WebDriverFactory.class)
 public class AppConfigurator
 {
     @Bean

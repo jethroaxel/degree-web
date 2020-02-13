@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-import profile.Profile;
+import profile.ProfilePage;
 
 @Component
 @Lazy
@@ -18,22 +18,22 @@ public class HomePage
     private static final By CARDS = By.cssSelector(".guts-m-t-1.m-guts-m-h-2");
     private static final By PROFILE = By.cssSelector(".tabnav__link.ng-scope");
 
-    private final WebDriver webDriver;
+    private final WebDriver driver;
 
     @Inject
     @Lazy
-    Profile profile;
+    ProfilePage profilePage;
 
     public HomePage(WebDriver webDriver)
     {
-        this.webDriver = webDriver;
+        this.driver = webDriver;
         new WebDriverWait(webDriver, 30)
                 .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(CARDS));
     }
 
-    public Profile clickOnProfile()
+    public ProfilePage clickOnProfile()
     {
-        webDriver.findElement(PROFILE).click();
-        return profile;
+        driver.findElement(PROFILE).click();
+        return profilePage;
     }
 }

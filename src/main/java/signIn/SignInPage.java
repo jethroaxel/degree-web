@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 
 import home.HomePage;
+import user.UserCredentials;
 
 @Component
 @Lazy
@@ -34,17 +35,17 @@ public class SignInPage
                 .until(ExpectedConditions.visibilityOfElementLocated(USERNAME_INPUT));
     }
 
-    public void addEmail(String username)
+    private void addEmail(String username)
     {
         driver.findElement(USERNAME_INPUT).sendKeys(username);
     }
 
-    public void continueToPassword()
+    private void continueToPassword()
     {
         driver.findElement(CONTINUE).click();
     }
 
-    public HomePage continueToSignIn(String password)
+    private HomePage continueToSignIn(String password)
     {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_INPUT))
@@ -55,7 +56,11 @@ public class SignInPage
         return homePage;
     }
 
-    public void signIn(String user, String psswd)
+    public HomePage signIn(UserCredentials credentials)
     {
+        addEmail(credentials.getUserName());
+        continueToPassword();
+        homePage = continueToSignIn(credentials.getPassword());
+        return homePage;
     }
 }
